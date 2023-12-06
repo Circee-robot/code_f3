@@ -151,6 +151,9 @@ install_udev:
 		-c "reset" \
 		-c "shutdown"
 
+openocd:
+	openocd -f $(OPENOCD_CFG) \
+	
 #feedback
 #NOTE: the files in the gdb dir must correspond to your MCU
 %.debug: %.elf
