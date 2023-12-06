@@ -5,6 +5,7 @@
 #include "uart.h"
 #include "timer_int.h"
 #include "canmsgs.h"
+#include "usound.h"
 
 #include <stdlib.h>
 
@@ -24,11 +25,13 @@ int main(){
 
     // blink_led();
     // test_encoder();
-    test_motor();
+    // test_motor();
     // test_send_comm_usart();
     // test_interrupt_timer();
 
     //test_can_transmit();
+
+    test_us_trigger();
 }
 
 void blink_led(){     //led is on PB3     
@@ -105,4 +108,10 @@ void test_can_transmit(){
         delay_ms(100);
     }while(!status);
     
+}
+
+void test_us_trigger(){
+    trigger_setup();
+
+    while (1);
 }
