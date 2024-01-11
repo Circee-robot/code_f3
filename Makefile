@@ -153,6 +153,11 @@ install_udev:
 
 openocd:
 	openocd -f $(OPENOCD_CFG) \
+
+%.gdb: %.elf
+	openocd -f $(OPENOCD_CFG) >openocd.log 2>&1 & 
+	gdb-multiarch $^ -ex 'target extended-remote :3333'
+
 	
 #feedback
 #NOTE: the files in the gdb dir must correspond to your MCU
@@ -167,4 +172,5 @@ clean:
 		-o -name "*.hex" \
 		-o -name "*.elf" \
 		-o -name "*.d" \
+		-o -name "*.log" \
 		\) -delete
