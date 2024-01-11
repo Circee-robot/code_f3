@@ -61,12 +61,16 @@
 #define MOTOR_A_OC_ID				TIM_OC2
 #define MOTOR_A_OC_MODE				TIM_OCM_PWM1
 
-#define MOTOR_A_GPIO_RCC_DIR		RCC_GPIOA
-#define MOTOR_A_PORT_DIR			GPIOA
-#define MOTOR_A_PIN_DIR				GPIO3
+#define MOTOR_A_GPIO_RCC_DIR1		RCC_GPIOA
+#define MOTOR_A_PORT_DIR1			GPIOA
+#define MOTOR_A_PIN_DIR1			GPIO3
 
-#define MOTOR_A_INIT_DIR			0
-#define MOTOR_A_INVERT_DIR          (-1)
+// TODO change
+#define MOTOR_A_GPIO_RCC_DIR2		RCC_GPIOA
+#define MOTOR_A_PORT_DIR2			GPIOA
+#define MOTOR_A_PIN_DIR2			GPIO3
+
+#define MOTOR_A_INVERT_DIR (0)
 /** @} */
 
 /**
@@ -89,12 +93,16 @@
 #define MOTOR_B_OC_ID				TIM_OC1
 #define MOTOR_B_OC_MODE				TIM_OCM_PWM1
 
-#define MOTOR_B_GPIO_RCC_DIR		RCC_GPIOA
-#define MOTOR_B_PORT_DIR			GPIOA
-#define MOTOR_B_PIN_DIR				GPIO7
+#define MOTOR_B_GPIO_RCC_DIR1		RCC_GPIOA
+#define MOTOR_B_PORT_DIR1			GPIOA
+#define MOTOR_B_PIN_DIR1			GPIO7
 
-#define MOTOR_B_INIT_DIR			0
-#define MOTOR_B_INVERT_DIR          (1)
+// TODO change
+#define MOTOR_B_GPIO_RCC_DIR2		RCC_GPIOA
+#define MOTOR_B_PORT_DIR2			GPIOA
+#define MOTOR_B_PIN_DIR2			GPIO7
+
+#define MOTOR_B_INVERT_DIR (0)
 /** @} */
 
 /**
@@ -102,6 +110,13 @@
  * 
  */
 enum motor_sel {MOTOR_A, MOTOR_B};
+
+/**
+ * @brief enum of the possible motor states
+ * 
+ */
+enum motor_state {STOP, FREE, FORWARD, BACKWARD};
+
 
 /**
  * @brief This function initializes the timers (including the timer output comparator) and GPIOs to pilot by PWM the propulsion motors + the GPIOs for the direction
@@ -112,7 +127,8 @@ void motor_setup();
 /**
  * @brief This function pilots the sel (MOTOR_A or MOTOR_B) with a value between -100(backward full speed) and +100 (forward full speed). The forward direction depends on the sign of MOTOR_X_INVER_DIR.
  * 
- * @param sel    The motor that will be piloted (eg MOTOR_A) 
- * @param value    value is between -100 and +100, controls the speed and direction of the motor sel (eg +54)
+ * @param sel The motor that will be piloted (eg MOTOR_A) 
+ * @param value value is between 0 and 255
+ * @param state Motor config between STOP FREE FORWARD BACKWARD
  */
-void motor_set(enum motor_sel sel, int8_t value);
+void motor_set(enum motor_sel sel, uint8_t value, enum motor_state state);

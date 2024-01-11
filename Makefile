@@ -69,6 +69,7 @@ libopencm3:
 
 # Openocd configuration
 OPENOCD_CFG = /usr/share/openocd/scripts/board/st_nucleo_f3.cfg
+#OPENOCD_CFG = ../openocd/xpack-openocd-0.11.0-1/scripts/board/st_nucleo_f3.cfg
 
 
 LFlags += -T $(LINKER_SCRIPTS_DIR)/stm32f303.ld
@@ -143,7 +144,7 @@ install_udev:
 
 #to flash onto the chip
 %.flash: %.hex
-	openocd -f $(OPENOCD_CFG) \
+	../openocd/xpack-openocd-0.11.0-1/bin/openocd -f $(OPENOCD_CFG) \
 		-c "init" \
 		-c "reset init" \
 		-c "flash write_image erase $^" \

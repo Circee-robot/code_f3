@@ -7,6 +7,7 @@ Reminder: To clone the submodule in the same time, use `git clone --recurse-subm
 If you forgot to clone with submodule just run `git submodule update --init --recursive`
 
 To compile and flash you need gcc-arm-none-eabi-bin, st-linkand  openocd
+openocd 0.12.0 is broken while flashing f3, openocd 0.11.0 is known to work
 
 To build: `mainTest.elf`
 To flash: `mainTest.flash`

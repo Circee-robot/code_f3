@@ -57,8 +57,11 @@ void test_encoder(){
 void test_motor(){
     motor_setup();
 
-    motor_set(MOTOR_A,-70);
-    motor_set(MOTOR_B,-45);
+    motor_set(MOTOR_A,70,FORWARD);
+    motor_set(MOTOR_B,45,FORWARD);
+    delay_ms(5000);
+    motor_set(MOTOR_A,70,BACKWARD);
+    motor_set(MOTOR_B,45,BACKWARD);
 }
 
 
@@ -73,11 +76,11 @@ void test_send_comm_usart(){
 }
 
 void test_interrupt_timer(){
-    _gpio_setup_pin(LED_GPIO_RCC,LED_GPIO_PORT,LED_GPIO_PIN,GPIO_MODE_OUTPUT,GPIO_PUPD_NONE,GPIO_OTYPE_PP);          
+    _gpio_setup_pin(LED_GPIO_RCC,LED_GPIO_PORT,LED_GPIO_PIN,GPIO_MODE_OUTPUT,GPIO_PUPD_NONE,GPIO_OTYPE_PP);
 
     timer_setup_interrupt();
     while (1);
-}        
+}
 
 void test_can_transmit(){
     int len = 2;
@@ -104,5 +107,5 @@ void test_can_transmit(){
         fprintf(stderr,"transmission status: %d\n",status);
         delay_ms(100);
     }while(!status);
-    
+
 }
