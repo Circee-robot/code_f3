@@ -9,6 +9,7 @@
 
 #include <stdlib.h>
 
+void test_us_trigger();
 void test_motor();
 void test_send_comm_usart();
 void test_interrupt_timer();
