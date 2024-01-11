@@ -151,18 +151,11 @@ install_udev:
 		-c "reset" \
 		-c "shutdown"
 
-openocd:
-	openocd -f $(OPENOCD_CFG) \
-
+# Debugging with GDB
 %.gdb: %.elf
-	openocd -f $(OPENOCD_CFG) >openocd.log 2>&1 & 
-	gdb-multiarch $^ -ex 'target extended-remote :3333'
-
-	
-#feedback
-#NOTE: the files in the gdb dir must correspond to your MCU
-%.debug: %.elf
-	$(GDB) $^ --command=gdb/attach.gdb
+	openocd -c "telnet_port 2222;gdb_port 2223" -f $(OPENOCD_CFG) >openocd.log 2>&1 &
+	gdb-multiarch $^ -ex 'target extended-remote :2223'
+	{ echo "shutdown"; cat -; } | telnet 127.0.0.1 2222
 
 clean:
 		find . \

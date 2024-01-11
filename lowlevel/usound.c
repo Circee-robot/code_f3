@@ -6,7 +6,7 @@ void trigger_setup(){
     nvic_enable_irq(US_TRIGGER_NVIC);
 
 	_timer_setup_output_c(US_TRIGGER_TIM, TIM_OC1, TIM_OCM_FROZEN, US_TRIGGER_RISE_VALUE);
-    timer_enable_irq(US_TRIGGER_TIM,TIM_DIER_CC1IE);        
+    timer_enable_irq(US_TRIGGER_TIM,TIM_DIER_CC1IE);
 
     _timer_setup_output_c(US_TRIGGER_TIM, TIM_OC2, TIM_OCM_FROZEN, US_TRIGGER_FALL_VALUE);
     timer_enable_irq(US_TRIGGER_TIM,TIM_DIER_CC2IE);
@@ -18,13 +18,25 @@ void trigger_setup(){
 	_timer_start(US_TRIGGER_TIM);
 }
 
+//void echo_setup(){
+    //
+    //_gpio_setup_pin(
+            //R,
+            //port,
+            //pin,
+            //mode,
+            //pull_up_or_down,
+            //otype
+            //);
+//}
+
 void tim2_isr(){
     if (timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC1IF)) // rising edge
 	{
         //do something
         timer_clear_flag(US_TRIGGER_TIM, TIM_SR_CC1IF);
         timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC1IF);
-        
+
         gpio_set(US_TRIGGER_PORT,US_TRIGGER_PIN);
 	}
     if (timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC2IF)) // falling edge
@@ -32,7 +44,7 @@ void tim2_isr(){
         //do something
         timer_clear_flag(US_TRIGGER_TIM, TIM_SR_CC2IF);
         timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC2IF);
-        
+
         gpio_clear(US_TRIGGER_PORT,US_TRIGGER_PIN);
 	}
 }
