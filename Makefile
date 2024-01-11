@@ -78,7 +78,7 @@ LFlags += -T $(LINKER_SCRIPTS_DIR)/stm32f303.ld
 #include our directories with .h files
 #add directories separated by whitespaces in INCPATHS
 #a reparer
-INCPATHS=lowlevel/include #$(DIR2) ...
+INCPATHS=lowlevel/include test/include #$(DIR2) ...
 
 INC_PARAMS=$(foreach d, $(INCPATHS), -I $d)
 
@@ -98,7 +98,7 @@ all: mainTest.flash
 	@echo CC $<
 
 
-pathMainTest = lowlevel 
+pathMainTest = lowlevel test
  
 srcMainTest = $(foreach d, $(pathMainTest), $(wildcard $d/*.c))
 
