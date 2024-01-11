@@ -18,7 +18,7 @@ void trigger_setup(){
 	_timer_start(US_TRIGGER_TIM);
 }
 
-void tim15_isr(){
+void tim2_isr(){
     if (timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC1IF)) // rising edge
 	{
         //do something
