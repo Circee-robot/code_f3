@@ -18,17 +18,17 @@ void trigger_setup(){
 	_timer_start(US_TRIGGER_TIM);
 }
 
-//void echo_setup(){
-    //
-    //_gpio_setup_pin(
-            //R,
-            //port,
-            //pin,
-            //mode,
-            //pull_up_or_down,
-            //otype
-            //);
-//}
+void echo_setup(){
+	/* Setup timer*/
+	_timer_setup(US_ECHO_TIM_RCC,US_ECHO_TIM,US_ECHO_PRESCALER_TIM,US_ECHO_PERIOD_TIM);
+
+	/*timer input capture*/
+	timer_ic_set_input(US_ECHO_TIM, TIM_IC1, TIM_IC_IN_TI1); // revoir si cette config est bonne
+	timer_direction_up(US_ECHO_TIM);
+
+    /*Setup GPIO capture*/
+    _gpio_setup_pin_af(US_ECHO_GPIO_RCC,US_ECHO_PORT,US_ECHO_PIN,US_ECHO_GPIO_AF,GPIO_PUPD_NONE,GPIO_OTYPE_PP);
+}
 
 void tim2_isr(){
     if (timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC1IF)) // rising edge
