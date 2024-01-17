@@ -11,14 +11,21 @@ CXX= $(Toolchain)g++
 CXXFlags =
 LD = $(Toolchain)ld
 LFlags =
-GDB=$(Toolchain)gdb
+GDB := $(Toolchain)gdb
+
+# Patch for ubuntu
+ifeq (, $(shell which $(GDB)))
+ifeq (, $(shell which gdb-multiarch))
+else
+	GDB := gdb-multiarch
+endif
+endif
 
 ifeq (, $(shell which ccache))
 else
 	CC := ccache $(CC)
 	CXX:= ccache $(CXX)
 endif
-
 
 # Generic flags
 CFlags += \
@@ -28,12 +35,6 @@ CFlags += \
 	-Wall \
 	-Wextra \
 	-g \
-
-	# -ffunction-sections \
-	# -fdata-sections \
-	# -fno-common \
-	# -fno-exceptions \
-	# --static
 
 CXXFlags += \
 	-std=gnu++14
@@ -64,13 +65,8 @@ LIBOPENCM3_DIR = $(Makefile_path)/hal_common/libopencm3
 CFlags += -I $(LIBOPENCM3_DIR)/include -DSTM32F3
 LFlags += -L $(LIBOPENCM3_DIR)/lib -lopencm3_stm32f3
 
-libopencm3:
-	$(MAKE) -C $(LIBOPENCM3_DIR) -j
-
 # Openocd configuration
 OPENOCD_CFG = /usr/share/openocd/scripts/board/st_nucleo_f3.cfg
-#OPENOCD_CFG = ../openocd/xpack-openocd-0.11.0-1/scripts/board/st_nucleo_f3.cfg
-
 
 LFlags += -T $(LINKER_SCRIPTS_DIR)/stm32f303.ld
 
@@ -84,8 +80,8 @@ INC_PARAMS=$(foreach d, $(INCPATHS), -I $d)
 
 CFlags += $(INC_PARAMS)
 
-##
-# CFlags += -I lowlevel/include
+libopencm3:
+	$(MAKE) -C $(LIBOPENCM3_DIR) -j
 
 all: mainTest.flash
 
@@ -114,7 +110,6 @@ mainTest.elf: $(objMainTest) \
 	$(CC) $(CFlags) $^ $(LFlags) -o $@
 	@echo LINK $@
 
--include $(depsMainTest)
 %.d: %.c
 	@$(CC) $(CFlags) $< -MM -MT $(@:.d=.o) >$@
 
@@ -151,11 +146,13 @@ install_udev:
 		-c "reset" \
 		-c "shutdown"
 
+OPENOCD_TELNET_PORT := 2222
+OPENOCD_GDB_PORT := 2223
 # Debugging with GDB
 %.gdb: %.elf
-	openocd -c "telnet_port 2222;gdb_port 2223" -f $(OPENOCD_CFG) >openocd.log 2>&1 &
-	gdb-multiarch $^ -ex 'target extended-remote :2223'
-	{ echo "shutdown"; cat -; } | telnet 127.0.0.1 2222
+	openocd -c "telnet_port $(OPENOCD_TELNET_PORT);gdb_port $(OPENOCD_GDB_PORT)" -f $(OPENOCD_CFG) >openocd.log 2>&1 &
+	$(GDB) $^ -ex 'target extended-remote :$(OPENOCD_GDB_PORT)'
+	{ echo "shutdown"; sleep 0.1; } | telnet 127.0.0.1 $(OPENOCD_TELNET_PORT)
 
 clean:
 		find . \
