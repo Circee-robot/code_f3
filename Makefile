@@ -29,12 +29,17 @@ endif
 
 # Generic flags
 CFlags += \
-	-Os \
 	-std=gnu11 \
 	-fdiagnostics-color=always \
 	-Wall \
 	-Wextra \
 	-g \
+
+ifdef DEBUG
+	CFlags += -O0
+else
+	CFlags += -Os
+endif
 
 CXXFlags += \
 	-std=gnu++14

@@ -22,10 +22,6 @@
 #include "canmsgs.h"
 #include "usound.h"
 
-#define LED_GPIO_PORT GPIOB
-#define LED_GPIO_RCC RCC_GPIOB
-#define LED_GPIO_PIN GPIO3
-
 void test_us_trigger();
 void test_us_echo();
 void test_motor();

@@ -12,6 +12,7 @@ int main(){
     // test_send_comm_usart();
     // test_interrupt_timer();
     //test_can_transmit();
-    test_us_trigger();
+    /*test_us_trigger();*/
+    test_us_echo();
 }
 
