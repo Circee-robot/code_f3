@@ -144,7 +144,7 @@ install_udev:
 
 #to flash onto the chip
 %.flash: %.hex
-	../openocd/xpack-openocd-0.11.0-1/bin/openocd -f $(OPENOCD_CFG) \
+	openocd -f $(OPENOCD_CFG) \
 		-c "init" \
 		-c "reset init" \
 		-c "flash write_image erase $^" \
