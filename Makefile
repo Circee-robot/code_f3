@@ -1,3 +1,5 @@
+DEBUG:=putain
+
 default: all
 
 Makefile_path := $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))

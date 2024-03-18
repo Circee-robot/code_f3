@@ -23,11 +23,18 @@ void echo_setup(){
 	_timer_setup(US_ECHO_TIM_RCC,US_ECHO_TIM,US_ECHO_PRESCALER_TIM,US_ECHO_PERIOD_TIM);
 
 	/*timer input capture*/
-	timer_ic_set_input(US_ECHO_TIM, TIM_IC1, TIM_IC_IN_TI1); // revoir si cette config est bonne
+	timer_ic_set_input(US_ECHO_TIM, TIM_IC1, TIM_IC_IN_TI1);
 	timer_direction_up(US_ECHO_TIM);
+    timer_set_oc_polarity_low(US_ECHO_TIM, TIM_OC1);
+    timer_set_oc_polarity_low(US_ECHO_TIM, TIM_OC1N);
+
+    nvic_enable_irq(NVIC_TIM1_UP_TIM16_IRQ); 
+    timer_enable_irq(US_ECHO_TIM,TIM_DIER_CC1IE);
 
     /*Setup GPIO capture*/
     _gpio_setup_pin_af(US_ECHO_GPIO_RCC,US_ECHO_PORT,US_ECHO_PIN,US_ECHO_GPIO_AF,GPIO_PUPD_NONE,GPIO_OTYPE_PP);
+
+    timer_ic_enable(US_ECHO_TIM, TIM_IC1);
 }
 
 void tim2_isr(){
@@ -47,4 +54,18 @@ void tim2_isr(){
 
         gpio_clear(US_TRIGGER_PORT,US_TRIGGER_PIN);
 	}
+}
+
+void tim1_up_tim16_isr(){
+   int b = 8;
+    if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1IF))
+	{
+        // timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1IF);
+        int a = 100;
+    }
+    if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1OF)) 
+	{
+        timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1OF);
+        int b = 100;
+    }
 }

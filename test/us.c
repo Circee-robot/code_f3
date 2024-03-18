@@ -31,7 +31,7 @@ void test_us_echo(){
         counter_debut = timer_get_counter(US_ECHO_TIM);
         delay_ms(5);
         gpio_set(LED_GPIO_PORT,LED_GPIO_PIN);
-        delay_ms(10);
+        delay_ms(2);
         gpio_clear(LED_GPIO_PORT,LED_GPIO_PIN);
         delay_ms(5);
         counter_fin = timer_get_counter(US_ECHO_TIM);
