@@ -37,8 +37,8 @@
  * 
  * Two channels are used for the MOTOR_A and MOTOR_B
  */
-#define MOTOR_TIM_RCC				RCC_TIM3
-#define MOTOR_TIM					TIM3
+#define MOTOR_TIM_RCC				RCC_TIM1
+#define MOTOR_TIM					TIM1
 /** @} */
 
 /**
@@ -51,7 +51,6 @@
  * DIR stands for direction (boolean value) \n
  * INIT_DIR is the initial direction of the motor
  * INVERT_DIR allows to define the forward direction in motor_set (must be 1 or -1)
- * Pinmap used here: EN on PA4 (with TIM3_CH2), DIR on PA3
  */
 #define MOTOR_A_GPIO_RCC_EN			RCC_GPIOA
 #define MOTOR_A_PORT_EN				GPIOA
@@ -82,7 +81,6 @@
  * DIR stands for direction (boolean value) \n
  * INIT_DIR is the initial direction of the motor
  * INVERT_DIR allows to define the forward direction in motor_set (must be 1 or -1)
- * Pinmap used here: EN on PA6 (with TIM3_CH1), DIR on PA7
  */
 #define MOTOR_B_GPIO_RCC_EN			RCC_GPIOA
 #define MOTOR_B_PORT_EN				GPIOA
