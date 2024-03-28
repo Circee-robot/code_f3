@@ -13,3 +13,5 @@
 
 # doxygen output
 doxygen
+
+libopencm3

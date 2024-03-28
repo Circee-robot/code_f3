@@ -12,6 +12,7 @@
  * @author NPXav Benano Kit
 */
 #include "test.h"
+#include "usound.h"
 
 void test_us_trigger(){
     trigger_setup();
