@@ -1,14 +1,14 @@
 /**
  * @file
- * 
+ *
  * This file is part of cdfr2020BaseRoulanteRework
- * 
- * @brief This implements the functions required to pilot the propulsion motors of the robot  
- * 
- * @date  06/2020  
- * 
+ *
+ * @brief This implements the functions required to pilot the propulsion motors of the robot
+ *
+ * @date  06/2020
+ *
  * Licence :
- * 
+ *
  * Robotronik Phelma
  * @author NPXav Benano Trukbidule
 */
@@ -21,20 +21,22 @@
 
 /**
  * Prescale 64000000 Hz system clock by 64 = 1000000 Hz.
+ * We count from 0 so -1
  */
-#define PWM_PRESCALE	(64)
+#define PWM_PRESCALE	(64-1)
 
 /**
  * We need a 50 Hz period (1000 / 20ms = 50), thus divide 100000 by 50 = 20000 (us).
+ * We count from 0 so -1
  */
-#define PWM_PERIOD		(20000)
+#define PWM_PERIOD		(20000-1)
 
 
 /**
  * @defgroup MOTOR_TIM motor_tim
  * @{
  * @brief Internal timer used to pilot the motors
- * 
+ *
  * Two channels are used for the MOTOR_A and MOTOR_B
  */
 #define MOTOR_TIM_RCC				RCC_TIM1
@@ -103,27 +105,27 @@
 
 /**
  * @brief enum of the two motors used to identify them in some functions (like function motor_set)
- * 
+ *
  */
 enum motor_sel {MOTOR_A, MOTOR_B};
 
 /**
  * @brief enum of the possible motor states
- * 
+ *
  */
 enum motor_state {STOP, FREE, FORWARD, BACKWARD};
 
 
 /**
  * @brief This function initializes the timers (including the timer output comparator) and GPIOs to pilot by PWM the propulsion motors + the GPIOs for the direction
- * 
+ *
  */
 void motor_setup();
 
 /**
  * @brief This function pilots the sel (MOTOR_A or MOTOR_B) with a value between -100(backward full speed) and +100 (forward full speed). The forward direction depends on the sign of MOTOR_X_INVER_DIR.
- * 
- * @param sel The motor that will be piloted (eg MOTOR_A) 
+ *
+ * @param sel The motor that will be piloted (eg MOTOR_A)
  * @param value value is between 0 and 255
  * @param state Motor config between STOP FREE FORWARD BACKWARD
  */

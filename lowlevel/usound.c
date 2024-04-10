@@ -57,42 +57,42 @@ void tim2_isr(){
 }
 
 
-void tim1_up_tim16_isr(){
-   int b = 8;
-   if (!measurement_started)
-   {
-        if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1IF))
-	    {
-        timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1IF);
+// void tim1_up_tim16_isr(){
+//    int b = 8;
+//    if (!measurement_started)
+//    {
+//         if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1IF))
+// 	    {
+//         timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1IF);
         
-        timer_disable_counter(US_ECHO_TIM);
-        timer_set_counter(US_ECHO_TIM, 0);
-        measurement_us = timer_get_counter(US_ECHO_TIM);
-        timer_enable_counter(US_ECHO_TIM);
-        measurement_started = true;
-        }
-        else
-        {
-            printf("Problem, interrup but no flag raised");
-        }
-   }
-   else
-   {
-    if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1IF))
-	    {
-        timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1IF);
-        measurement_us = timer_get_counter(US_ECHO_TIM) - measurement_us;
-        measurement_started = false;
-        }
-        else
-        {
-            printf("Problem, interrup but no flag raised");
-        }
-   }
+//         timer_disable_counter(US_ECHO_TIM);
+//         timer_set_counter(US_ECHO_TIM, 0);
+//         measurement_us = timer_get_counter(US_ECHO_TIM);
+//         timer_enable_counter(US_ECHO_TIM);
+//         measurement_started = true;
+//         }
+//         else
+//         {
+//             printf("Problem, interrup but no flag raised");
+//         }
+//    }
+//    else
+//    {
+//     if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1IF))
+// 	    {
+//         timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1IF);
+//         measurement_us = timer_get_counter(US_ECHO_TIM) - measurement_us;
+//         measurement_started = false;
+//         }
+//         else
+//         {
+//             printf("Problem, interrup but no flag raised");
+//         }
+//    }
     
-    // if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1OF)) 
-	// {
-    //     timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1OF);
-    //     int b = 100;
-    // }
-}
+//     // if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1OF)) 
+// 	// {
+//     //     timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1OF);
+//     //     int b = 100;
+//     // }
+// }
