@@ -32,18 +32,18 @@
 
 /**
  * @brief This function initializes the timers (including the timer output comparator) and GPIOs to pilot US trigger
- * 
+ *
  */
 void trigger_setup();
 
 /**
  * @brief This function initializes the timers for input capture and GPIOs to pilot US ECHO
- * 
+ *
  */
 void echo_setup();
 
 void tim15_isr();
 
 
-// volatile bool measurement_started = false;
-// volatile int measurement_us = 0;
+volatile bool measurement_started = false;
+volatile int measurement_us = 0;

@@ -28,7 +28,7 @@ void echo_setup(){
     timer_set_oc_polarity_low(US_ECHO_TIM, TIM_OC1);
     timer_set_oc_polarity_low(US_ECHO_TIM, TIM_OC1N);
 
-    nvic_enable_irq(NVIC_TIM1_UP_TIM16_IRQ); 
+    nvic_enable_irq(NVIC_TIM1_UP_TIM16_IRQ);
     timer_enable_irq(US_ECHO_TIM,TIM_DIER_CC1IE);
 
     /*Setup GPIO capture*/
@@ -37,62 +37,62 @@ void echo_setup(){
     timer_ic_enable(US_ECHO_TIM, TIM_IC1);
 }
 
-void tim2_isr(){
-    if (timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC1IF)) // rising edge
-	{
-        //do something
-        timer_clear_flag(US_TRIGGER_TIM, TIM_SR_CC1IF);
-        timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC1IF);
+// void tim2_isr(){
+//     if (timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC1IF)) // rising edge
+// 	{
+//         //do something
+//         timer_clear_flag(US_TRIGGER_TIM, TIM_SR_CC1IF);
+//         timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC1IF);
 
-        gpio_set(US_TRIGGER_PORT,US_TRIGGER_PIN);
-	}
-    if (timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC2IF)) // falling edge
-	{
-        //do something
-        timer_clear_flag(US_TRIGGER_TIM, TIM_SR_CC2IF);
-        timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC2IF);
+//         gpio_set(US_TRIGGER_PORT,US_TRIGGER_PIN);
+// 	}
+//     if (timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC2IF)) // falling edge
+// 	{
+//         //do something
+//         timer_clear_flag(US_TRIGGER_TIM, TIM_SR_CC2IF);
+//         timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC2IF);
 
-        gpio_clear(US_TRIGGER_PORT,US_TRIGGER_PIN);
-	}
-}
-
-
-// void tim1_up_tim16_isr(){
-//    int b = 8;
-//    if (!measurement_started)
-//    {
-//         if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1IF))
-// 	    {
-//         timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1IF);
-        
-//         timer_disable_counter(US_ECHO_TIM);
-//         timer_set_counter(US_ECHO_TIM, 0);
-//         measurement_us = timer_get_counter(US_ECHO_TIM);
-//         timer_enable_counter(US_ECHO_TIM);
-//         measurement_started = true;
-//         }
-//         else
-//         {
-//             printf("Problem, interrup but no flag raised");
-//         }
-//    }
-//    else
-//    {
-//     if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1IF))
-// 	    {
-//         timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1IF);
-//         measurement_us = timer_get_counter(US_ECHO_TIM) - measurement_us;
-//         measurement_started = false;
-//         }
-//         else
-//         {
-//             printf("Problem, interrup but no flag raised");
-//         }
-//    }
-    
-//     // if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1OF)) 
-// 	// {
-//     //     timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1OF);
-//     //     int b = 100;
-//     // }
+//         gpio_clear(US_TRIGGER_PORT,US_TRIGGER_PIN);
+// 	}
 // }
+
+
+void tim1_up_tim16_isr(){
+   int b = 8;
+   if (!measurement_started)
+   {
+        if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1IF))
+	    {
+            timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1IF);
+
+            timer_disable_counter(US_ECHO_TIM);
+            timer_set_counter(US_ECHO_TIM, 0);
+            measurement_us = timer_get_counter(US_ECHO_TIM);
+            timer_enable_counter(US_ECHO_TIM);
+            measurement_started = true;
+        }
+        else
+        {
+            printf("Problem, interrupt but no flag raised");
+        }
+   }
+   else
+   {
+    if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1IF))
+	    {
+        timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1IF);
+        measurement_us = timer_get_counter(US_ECHO_TIM) - measurement_us;
+        measurement_started = false;
+        }
+        else
+        {
+            printf("Problem, interrupt but no flag raised");
+        }
+   }
+
+    // if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1OF))
+	// {
+    //     timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1OF);
+    //     int b = 100;
+    // }
+}
