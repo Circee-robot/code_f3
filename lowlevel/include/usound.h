@@ -44,6 +44,3 @@ void echo_setup();
 
 void tim15_isr();
 
-
-volatile bool measurement_started = false;
-volatile int measurement_us = 0;

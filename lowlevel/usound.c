@@ -57,10 +57,13 @@ void echo_setup(){
 // }
 
 
+volatile bool measurement_started = false;
+volatile int measurement_us = 0;
+
 void tim1_up_tim16_isr(){
-   int b = 8;
-   if (!measurement_started)
-   {
+    int b = 8;
+    if (!measurement_started)
+    {
         if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1IF))
 	    {
             timer_clear_flag(US_ECHO_TIM, TIM_SR_CC1IF);
