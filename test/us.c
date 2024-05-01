@@ -1,14 +1,14 @@
 /**
  * @file
- * 
+ *
  * This file is part of cdfr2020BaseRoulanteRework
- * 
+ *
  * @brief This implements the functions to test the project
- * 
- * @date  01/2024  
- * 
+ *
+ * @date  01/2024
+ *
  * Licence :
- * 
+ *
  * @author NPXav Benano Kit
 */
 #include "test.h"
@@ -27,15 +27,28 @@ void test_us_echo(){
     int counter_debut;
     int counter_fin;
 
+    gpio_clear(LED_GPIO_PORT,LED_GPIO_PIN);
+    timer_ic_enable(US_ECHO_TIM, TIM_IC1);
+
+
     while (1){
         _timer_start(US_ECHO_TIM);
         counter_debut = timer_get_counter(US_ECHO_TIM);
         delay_ms(5);
+        int measurement_a = measurement_us;
         gpio_set(LED_GPIO_PORT,LED_GPIO_PIN);
-        delay_ms(2);
+        int measurement_b = measurement_us;
+
+        delay_ms(16);
         gpio_clear(LED_GPIO_PORT,LED_GPIO_PIN);
-        delay_ms(5);
-        counter_fin = timer_get_counter(US_ECHO_TIM);
-        delay_ms(1000);
+        int measurement_c = measurement_us;
+        delay_ms(1);
+        delay_ms(1);
+
+
+        // gpio_clear(LED_GPIO_PORT,LED_GPIO_PIN);
+        // delay_ms(5);
+        // counter_fin = timer_get_counter(US_ECHO_TIM);
+        // delay_ms(1000);
     }
 }

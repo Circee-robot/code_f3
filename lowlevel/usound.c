@@ -34,7 +34,7 @@ void echo_setup(){
     /*Setup GPIO capture*/
     _gpio_setup_pin_af(US_ECHO_GPIO_RCC,US_ECHO_PORT,US_ECHO_PIN,US_ECHO_GPIO_AF,GPIO_PUPD_NONE,GPIO_OTYPE_PP);
 
-    timer_ic_enable(US_ECHO_TIM, TIM_IC1);
+    // timer_ic_enable(US_ECHO_TIM, TIM_IC1);
 }
 
 // void tim2_isr(){
@@ -57,10 +57,12 @@ void echo_setup(){
 // }
 
 
-volatile bool measurement_started = false;
-volatile int measurement_us = 0;
+
+volatile bool measurement_started;
+volatile int measurement_us;
 
 void tim1_up_tim16_isr(){
+
     int b = 8;
     if (!measurement_started)
     {

@@ -44,3 +44,5 @@ void echo_setup();
 
 void tim15_isr();
 
+extern volatile bool measurement_started;
+extern volatile int measurement_us;
