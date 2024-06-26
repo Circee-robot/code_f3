@@ -14,5 +14,6 @@ int main(){
     // test_can_transmit();
     // test_us_trigger();
     test_us_echo();
+    // test_us();
 }
 

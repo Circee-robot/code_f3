@@ -28,7 +28,6 @@ void test_us_echo(){
     int counter_fin;
 
     gpio_clear(LED_GPIO_PORT,LED_GPIO_PIN);
-    timer_ic_enable(US_ECHO_TIM, TIM_IC1);
 
 
     while (1){
@@ -51,4 +50,11 @@ void test_us_echo(){
         // counter_fin = timer_get_counter(US_ECHO_TIM);
         // delay_ms(1000);
     }
+}
+
+void test_us(){
+    trigger_setup();
+    echo_setup();
+
+    while(1);
 }

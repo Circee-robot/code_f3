@@ -34,27 +34,30 @@ void echo_setup(){
     /*Setup GPIO capture*/
     _gpio_setup_pin_af(US_ECHO_GPIO_RCC,US_ECHO_PORT,US_ECHO_PIN,US_ECHO_GPIO_AF,GPIO_PUPD_NONE,GPIO_OTYPE_PP);
 
-    // timer_ic_enable(US_ECHO_TIM, TIM_IC1);
+    timer_ic_enable(US_ECHO_TIM, TIM_IC1);
 }
 
-// void tim2_isr(){
-//     if (timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC1IF)) // rising edge
-// 	{
-//         //do something
-//         timer_clear_flag(US_TRIGGER_TIM, TIM_SR_CC1IF);
-//         timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC1IF);
+void tim2_isr(){
+    if (timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC1IF)) // rising edge
+	{
+        //do something
+        timer_clear_flag(US_TRIGGER_TIM, TIM_SR_CC1IF);
+        timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC1IF);
 
-//         gpio_set(US_TRIGGER_PORT,US_TRIGGER_PIN);
-// 	}
-//     if (timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC2IF)) // falling edge
-// 	{
-//         //do something
-//         timer_clear_flag(US_TRIGGER_TIM, TIM_SR_CC2IF);
-//         timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC2IF);
+        gpio_set(US_TRIGGER_PORT,US_TRIGGER_PIN);
+	}
+    if (timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC2IF)) // falling edge
+	{
+        //do something
+        timer_clear_flag(US_TRIGGER_TIM, TIM_SR_CC2IF);
+        timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC2IF);
 
-//         gpio_clear(US_TRIGGER_PORT,US_TRIGGER_PIN);
-// 	}
-// }
+        gpio_clear(US_TRIGGER_PORT,US_TRIGGER_PIN);
+
+        // trigger finished, start waiting for measurement
+        _timer_start(US_ECHO_TIM);
+	}
+}
 
 
 
