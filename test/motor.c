@@ -25,8 +25,6 @@ void test_motor(){
         delay_ms(4000);
         motor_set(MOTOR_A,128,BACKWARD);
         delay_ms(4000);
-        motor_set(MOTOR_A,-1,FREE);
-        delay_ms(4000);
         motor_set(MOTOR_A,100,FORWARD);
         delay_ms(4000);
     // delay_ms(40);
