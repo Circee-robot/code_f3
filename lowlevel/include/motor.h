@@ -62,13 +62,9 @@
 #define MOTOR_A_OC_ID				TIM_OC1
 #define MOTOR_A_OC_MODE				TIM_OCM_PWM1
 
-#define MOTOR_A_GPIO_RCC_DIR1		RCC_GPIOF
-#define MOTOR_A_PORT_DIR1			GPIOF
-#define MOTOR_A_PIN_DIR1			GPIO0
-
-#define MOTOR_A_GPIO_RCC_DIR2		RCC_GPIOF
-#define MOTOR_A_PORT_DIR2			GPIOF
-#define MOTOR_A_PIN_DIR2			GPIO1
+#define MOTOR_A_GPIO_RCC_DIR		RCC_GPIOF
+#define MOTOR_A_PORT_DIR			GPIOF
+#define MOTOR_A_PIN_DIR			    GPIO1
 
 #define MOTOR_A_INVERT_DIR (0)
 /** @} */
@@ -92,15 +88,22 @@
 #define MOTOR_B_OC_ID				TIM_OC2
 #define MOTOR_B_OC_MODE				TIM_OCM_PWM1
 
-#define MOTOR_B_GPIO_RCC_DIR1		RCC_GPIOA
-#define MOTOR_B_PORT_DIR1			GPIOA
-#define MOTOR_B_PIN_DIR1			GPIO3
-
-#define MOTOR_B_GPIO_RCC_DIR2		RCC_GPIOA
-#define MOTOR_B_PORT_DIR2			GPIOA
-#define MOTOR_B_PIN_DIR2			GPIO4
+#define MOTOR_B_GPIO_RCC_DIR		RCC_GPIOA
+#define MOTOR_B_PORT_DIR			GPIOA
+#define MOTOR_B_PIN_DIR	    		GPIO3
 
 #define MOTOR_B_INVERT_DIR (0)
+/** @} */
+
+
+/**
+ * @defgroup MOTOR_EEP motor_eep
+ * @{
+ * @brief Sleep signal for H brigdge to free run the motors
+ */
+#define MOTOR_GPIO_RCC_EEP			RCC_GPIOA
+#define MOTOR_PORT_EEP				GPIOA
+#define MOTOR_PIN_EEP				GPIO4
 /** @} */
 
 /**
@@ -113,7 +116,7 @@ enum motor_sel {MOTOR_A, MOTOR_B};
  * @brief enum of the possible motor states
  *
  */
-enum motor_state {STOP, FREE, FORWARD, BACKWARD};
+enum motor_state {STOP, FORWARD, BACKWARD};
 
 
 /**

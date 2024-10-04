@@ -66,7 +66,7 @@ volatile int measurement_us;
 
 void tim1_up_tim16_isr(){
 
-    int b = 8;
+    //int b = 8;
     if (!measurement_started)
     {
         if (timer_get_flag(US_ECHO_TIM, TIM_SR_CC1IF))
