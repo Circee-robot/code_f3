@@ -19,27 +19,27 @@ void test_motor(){
 
 
     while(1){
-        motor_set(MOTOR_A,255,FORWARD);
+        motor_set(MOTOR_A,50,FORWARD);
         delay_ms(4000);
-        motor_set(MOTOR_A,-1,STOP);
-        delay_ms(4000);
-        motor_set(MOTOR_A,128,BACKWARD);
-        delay_ms(4000);
-        motor_set(MOTOR_A,100,FORWARD);
-        delay_ms(4000);
-    // delay_ms(40);
-    // motor_set(MOTOR_A,-1,STOP);
-    // delay_ms(40);
-    // motor_set(MOTOR_A,-1,FREE);
-    // delay_ms(40);
+        // motor_set(MOTOR_A,-1,STOP);
+        // delay_ms(4000);
+        // motor_set(MOTOR_A,128,BACKWARD);
+        // delay_ms(4000);
+        // motor_set(MOTOR_A,100,FORWARD);
+        // delay_ms(4000);
+        // delay_ms(40);
+        // motor_set(MOTOR_A,-1,STOP);
+        // delay_ms(40);
+        // motor_set(MOTOR_A,-1,FREE);
+        // delay_ms(40);
 
-    // motor_set(MOTOR_B,100,FORWARD);
-    // delay_ms(40);
-    // motor_set(MOTOR_B,128,BACKWARD);
-    // delay_ms(40);
-    // motor_set(MOTOR_B,-1,STOP);
-    // delay_ms(40);
-    // motor_set(MOTOR_B,-1,FREE);
-    // delay_ms(40);
+        motor_set(MOTOR_B,128,FORWARD);
+        delay_ms(4000   );
+        // motor_set(MOTOR_B,128,BACKWARD);
+        // delay_ms(40);
+        // motor_set(MOTOR_B,-1,STOP);
+        // delay_ms(40);
+        // motor_set(MOTOR_B,-1,FREE);
+        // delay_ms(40);
     }
 }

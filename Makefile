@@ -74,6 +74,9 @@ LFlags += -L $(LIBOPENCM3_DIR)/lib -lopencm3_stm32f3
 
 # Openocd configuration
 OPENOCD_CFG = /usr/share/openocd/scripts/board/st_nucleo_f3.cfg
+# OPENOCD_BIN = /home/beatrice/circee/xpack-openocd-0.11.0-5/bin/openocd
+OPENOCD_BIN = /home/beatrice/circee/xpack-openocd-0.11.0-1//bin/openocd
+# OPENOCD_BIN = openocd
 
 LFlags += -T $(LINKER_SCRIPTS_DIR)/stm32f303.ld
 
@@ -102,7 +105,7 @@ all: mainTest.flash
 
 
 pathMainTest = lowlevel test
- 
+
 srcMainTest = $(foreach d, $(pathMainTest), $(wildcard $d/*.c))
 
 objMainTest = $(foreach d, $(srcMainTest) , $(d:.c=.o) )
@@ -146,7 +149,7 @@ install_udev:
 
 #to flash onto the chip
 %.flash: %.hex
-	openocd -f $(OPENOCD_CFG) \
+	$(OPENOCD_BIN) -f $(OPENOCD_CFG) \
 		-c "init" \
 		-c "reset init" \
 		-c "flash write_image erase $^" \
@@ -157,7 +160,7 @@ OPENOCD_TELNET_PORT := 2222
 OPENOCD_GDB_PORT := 2223
 # Debugging with GDB
 %.gdb: %.elf
-	openocd -c "telnet_port $(OPENOCD_TELNET_PORT);gdb_port $(OPENOCD_GDB_PORT)" -f $(OPENOCD_CFG) >openocd.log 2>&1 &
+	$(OPENOCD_BIN) -c "telnet_port $(OPENOCD_TELNET_PORT);gdb_port $(OPENOCD_GDB_PORT)" -f $(OPENOCD_CFG) >openocd.log 2>&1 &
 	$(GDB) $^ -ex 'target extended-remote :$(OPENOCD_GDB_PORT)'
 	{ echo "shutdown"; sleep 0.1; } | telnet 127.0.0.1 $(OPENOCD_TELNET_PORT)
 

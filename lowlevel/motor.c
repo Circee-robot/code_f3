@@ -35,13 +35,13 @@ void motor_setup(){
 }
 
 void motor_sleep(){
-    gpio_set(MOTOR_PORT_EEP,MOTOR_PIN_EEP);
+    gpio_clear(MOTOR_PORT_EEP,MOTOR_PIN_EEP);
 }
 
 void motor_set(enum motor_sel sel, uint8_t value, enum motor_state state){
 
     int speed;
-    gpio_clear(MOTOR_PORT_EEP,MOTOR_PIN_EEP);
+    gpio_set(MOTOR_PORT_EEP,MOTOR_PIN_EEP);
     if(sel == MOTOR_B){
         /* control for motor B */
         switch(state){
