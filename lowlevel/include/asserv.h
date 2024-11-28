@@ -31,10 +31,10 @@ typedef struct _config {
 /**
  * Values of both motors' PIDs
  */
-# define KP_A (0);
+# define KP_A (1);
 # define KI_A (0);
 # define KD_A (0);
-# define KP_B (0);
+# define KP_B (1);
 # define KI_B (0);
 # define KD_B (0);
 
