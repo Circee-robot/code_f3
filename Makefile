@@ -34,8 +34,8 @@ CFlags += \
 	-std=gnu11 \
 	-fdiagnostics-color=always \
 	-Wall \
-	-Wextra \
-	-g \
+	-Wextra
+
 
 ifdef DEBUG
 	CFlags += -O0
@@ -77,6 +77,7 @@ OPENOCD_CFG = /usr/share/openocd/scripts/board/st_nucleo_f3.cfg
 # OPENOCD_BIN = /home/beatrice/circee/xpack-openocd-0.11.0-5/bin/openocd
 OPENOCD_BIN = /home/beatrice/circee/xpack-openocd-0.11.0-1//bin/openocd
 # OPENOCD_BIN = openocd
+OPENOCD_ARCH := ../openocd/xpack-openocd-0.11.0-1/bin/openocd
 
 LFlags += -T $(LINKER_SCRIPTS_DIR)/stm32f303.ld
 
@@ -112,6 +113,7 @@ objMainTest = $(foreach d, $(srcMainTest) , $(d:.c=.o) )
 
 depsMainTest := $(objMainTest:.o=.d)
 
+#/usr/bin/arm-none-eabi-strip mainTest.elf --strip-debug
 mainTest.elf: $(objMainTest) \
 	mainTest.c
 	#debug
