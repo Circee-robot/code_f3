@@ -62,10 +62,10 @@ int _encoder_get_counter(enum encoder_sel sel){
 	return 0;
 }
 
-int encoder_update(enum encoder_sel sel, volatile int *prev_count){
+void encoder_update(enum encoder_sel sel, volatile int *count){
 	const int cnt = _encoder_get_counter(sel);
 
-	int dl = cnt - *prev_count;
+	int dl = cnt - *count;
 	int limit = ENCODER_PERIOD/2;
 	*prev_count = cnt;
 	if(dl > limit){
@@ -73,5 +73,5 @@ int encoder_update(enum encoder_sel sel, volatile int *prev_count){
 	}else if(dl < -limit){
 	  dl = dl+ENCODER_PERIOD;
 	}
-	return dl;
+    *count = dl;
 }
