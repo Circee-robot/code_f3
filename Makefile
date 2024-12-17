@@ -75,7 +75,7 @@ LFlags += -L $(LIBOPENCM3_DIR)/lib -lopencm3_stm32f3
 # Openocd configuration
 OPENOCD_CFG = /usr/share/openocd/scripts/board/st_nucleo_f3.cfg
 # OPENOCD_BIN = /home/beatrice/circee/xpack-openocd-0.11.0-5/bin/openocd
-OPENOCD_BIN = /home/beatrice/circee/xpack-openocd-0.11.0-1//bin/openocd
+OPENOCD_BIN = /home/beatrice/circee/xpack-openocd-0.11.0-1/bin/openocd
 # OPENOCD_BIN = openocd
 OPENOCD_ARCH := ../openocd/xpack-openocd-0.11.0-1/bin/openocd
 
