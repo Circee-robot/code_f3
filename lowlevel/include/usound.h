@@ -21,6 +21,7 @@
 
 #define US_ECHO_TIM_RCC RCC_TIM16
 #define US_ECHO_TIM TIM16
+#define US_ECHO_NVIC NVIC_TIM1_UP_TIM16_IRQ
 
 #define US_ECHO_PRESCALER_TIM (64)
 #define US_ECHO_PERIOD_TIM (200000)
@@ -42,7 +43,7 @@ void trigger_setup();
  */
 void echo_setup();
 
-void tim15_isr();
+
 
 extern volatile bool measurement_started;
 extern volatile int measurement_us;

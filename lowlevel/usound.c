@@ -28,7 +28,7 @@ void echo_setup(){
     timer_set_oc_polarity_low(US_ECHO_TIM, TIM_OC1);
     timer_set_oc_polarity_low(US_ECHO_TIM, TIM_OC1N);
 
-    nvic_enable_irq(NVIC_TIM1_UP_TIM16_IRQ);
+    nvic_enable_irq(US_ECHO_NVIC);
     timer_enable_irq(US_ECHO_TIM,TIM_DIER_CC1IE);
 
     /*Setup GPIO capture*/
@@ -37,7 +37,7 @@ void echo_setup(){
     timer_ic_enable(US_ECHO_TIM, TIM_IC1);
 }
 
-void tim2_isr(){
+void tim1_trg_com_tim17_isr(){
     if (timer_get_flag(US_TRIGGER_TIM, TIM_SR_CC1IF)) // rising edge
 	{
         //do something
