@@ -133,3 +133,5 @@ void motor_setup();
  * @param state Motor config between STOP FREE FORWARD BACKWARD
  */
 void motor_set(enum motor_sel sel, uint8_t value, enum motor_state state);
+
+void motor_sleep();

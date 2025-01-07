@@ -94,7 +94,7 @@ int _encoder_get_counter(enum encoder_sel sel);
  * @brief delta steps in small time difference
  *
  * @param sel    the encoder that is updated
- * @param prev_count    pointer on the previous
+ * @param prev_count    pointer on the previous count
  * @return    delta value (difference between actual and previous)
  */
 int encoder_update(enum encoder_sel sel, volatile int *prev_count);
