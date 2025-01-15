@@ -12,22 +12,21 @@ typedef struct
     TYPE_ASSERVISSEMENT_PID_INTEGRAL AbsIMax; //Anti-windup
 
     TYPE_ASSERVISSEMENT_PID_INTEGRAL Integration;
-    TYPE_ASSERVISSEMENT_PID_TIME LastTime;
     TYPE_ASSERVISSEMENT_PID_POS LastPosition;
     TYPE_ASSERVISSEMENT_PID_POS LastValue;
     TYPE_ASSERVISSEMENT_PID_POS Target;
 
 } PID_Data;
 
-#define PID_A_PROPORTIONAL ()
-#define PID_A_DERIVATIVE   ()
-#define PID_A_INTEGRAL     ()
+#define PID_A_PROPORTIONAL (1)
+#define PID_A_DERIVATIVE   (1)
+#define PID_A_INTEGRAL     (1)
 
-#define PID_B_PROPORTIONAL ()
-#define PID_B_DERIVATIVE   ()
-#define PID_B_INTEGRAL     ()
+#define PID_B_PROPORTIONAL (1)
+#define PID_B_DERIVATIVE   (1)
+#define PID_B_INTEGRAL     (1)
 
-#define PID_ABSIMAX        ()
+#define PID_ABSIMAX        (1)
 
 /*
 Sets P, I, and D for a given PID loop, and sets the max of the error integration (before multiplication by I)
