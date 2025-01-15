@@ -1,35 +1,44 @@
 #include "asserv.h"
 
-void update_motor(pid_config config, pid_state * state){
+void update_motor(
+    pid_config config,
+    pid_state * state
+){
     // Choosing encoder depending on motor
-    int counter;
-    if (config.sel == MOTOR_A){
-        counter = encoder_update(ENCODER_A,&(state->prev_count));
-    } else {
-        counter = encoder_update(ENCODER_B,&(state->prev_count));
-    }
+    state->pos_tick += encoder_update(config.encoder_sel,&(state->encoder_tick_prev));
     // Calculating PID
-    float measured_rot = counter / MEASURE_PERIOD_MS;
-    float error = state->directive_rot - measured_rot;
-    float motor_ctrl = pid(error,config,state); // TODO switch dire
+    float error = state->directive_tick - state->pos_tick;
+    float pid_output = pid(config,state,error);
+    float motor_ctrl = (pid_output - state->last_pid_output);
+    state->last_pid_output = pid_output;
     // Direction switch
-    enum motor_state dir;
+    enum motor_state motor_dir;
     if (motor_ctrl >= 0) {
-        dir = FORWARD;
+        motor_dir = FORWARD;
     } else {
         motor_ctrl = motor_ctrl * (-1);
-        dir = BACKWARD;
+        motor_dir = BACKWARD;
     }
-    //
-    uint8_t motor_ctrl_duty = motor_ctrl * TPS_TO_DUTY_RATIO;
-    motor_set(config.sel, motor_ctrl_duty, dir);
+    motor_set(config.motor_sel,(uint8_t) motor_ctrl, motor_dir);
 }
 
-float pid(float error, pid_config config, pid_state * state){
+float pid(
+    pid_config config,
+    pid_state * state,
+    float error
+){
 
     float P,I,D;
 
     state->error_sum += error;
+    if (state->error_sum > config.imax)
+    {
+        state->error_sum = config.imax;
+    }
+    else if (state->error_sum < -config.imax)
+    {
+        state->error_sum = -config.imax;
+    }
 
     P = error * config.Kp;
     I = state->error_sum * config.Ki;
@@ -41,7 +50,10 @@ float pid(float error, pid_config config, pid_state * state){
 }
 
 
-void get_directive(pid_state * state_A, pid_state * state_B){
-    state_A->directive_rot = 2;
-    state_B->directive_rot = 2;
+void set_directive(
+    pid_state * state,
+    float directive
+){
+    *state = EMPTY_STATE;
+    state->directive_tick = directive;
 }

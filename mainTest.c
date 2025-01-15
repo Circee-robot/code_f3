@@ -8,7 +8,7 @@ int main(){
 
 
     // blink_led();
-    test_encoder();
+    // test_encoder();
     // test_motor();
     // test_send_comm_usart();
     // test_interrupt_timer();
@@ -16,5 +16,6 @@ int main(){
     // test_us_trigger();
     // test_us_echo();
     // test_us();
+    test_asserv();
 }
 
