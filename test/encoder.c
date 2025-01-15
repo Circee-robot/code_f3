@@ -26,14 +26,14 @@ void test_encoder(){
     volatile int counterLeft = 0;
     volatile int counterRight = 0;
 
-    int speed_B;
+    int dist_b;
 
     //encoder testing
     while(1){
 
         // encoder_update(ENCODER_A,&counterLeft);
-        speed_B = encoder_update(ENCODER_B,&counterRight);
-        fprintf(stderr,"counterLeft=%d \t speedleft=%d \t counterRight=%d \n",counterLeft,speed_B,counterRight);
+        dist_b = encoder_update(ENCODER_B,&counterRight);
+        fprintf(stderr,"counterLeft=%d \t speedleft=%d \t counterRight=%d \n",counterLeft,dist_b,counterRight);
         delay_ms(500);
     }
 }

@@ -1,6 +1,3 @@
-
-
-
 #define TYPE_ASSERVISSEMENT_PID_POS double
 #define TYPE_ASSERVISSEMENT_PID_TIME double
 #define TYPE_ASSERVISSEMENT_PID_PARAM double
@@ -20,20 +17,52 @@ typedef struct
     TYPE_ASSERVISSEMENT_PID_POS Target;
 
 } PID_Data;
- 
+
+#define PID_A_PROPORTIONAL ()
+#define PID_A_DERIVATIVE   ()
+#define PID_A_INTEGRAL     ()
+
+#define PID_B_PROPORTIONAL ()
+#define PID_B_DERIVATIVE   ()
+#define PID_B_INTEGRAL     ()
+
+#define PID_ABSIMAX        ()
+
 /*
 Sets P, I, and D for a given PID loop, and sets the max of the error integration (before multiplication by I)
 */
-void PID_SetParameters(PID_Data* PID, TYPE_ASSERVISSEMENT_PID_PARAM InP, TYPE_ASSERVISSEMENT_PID_PARAM InI, TYPE_ASSERVISSEMENT_PID_PARAM InD, TYPE_ASSERVISSEMENT_PID_INTEGRAL InAbsIMax);
+void PID_SetParameters(
+    PID_Data* PID,
+    TYPE_ASSERVISSEMENT_PID_PARAM InP,
+    TYPE_ASSERVISSEMENT_PID_PARAM InI,
+    TYPE_ASSERVISSEMENT_PID_PARAM InD,
+    TYPE_ASSERVISSEMENT_PID_INTEGRAL InAbsIMax
+    );
 
 /*
 Set the target position
 */
-void PID_SetTarget(PID_Data* PID, TYPE_ASSERVISSEMENT_PID_POS NewTarget);
+void PID_SetTarget(
+    PID_Data* PID,
+    TYPE_ASSERVISSEMENT_PID_POS NewTarget
+    );
 
 /*
 Resets the position, integration and time
 */
-void PID_Reset(PID_Data* PID, TYPE_ASSERVISSEMENT_PID_TIME Time, TYPE_ASSERVISSEMENT_PID_INTEGRAL Integral, TYPE_ASSERVISSEMENT_PID_POS LastValue);
+void PID_Reset(
+    PID_Data* PID,
+    TYPE_ASSERVISSEMENT_PID_TIME Time,
+    TYPE_ASSERVISSEMENT_PID_INTEGRAL Integral,
+    TYPE_ASSERVISSEMENT_PID_POS LastValue
+    );
 
-TYPE_ASSERVISSEMENT_PID_RETURN PID_Tick(PID_Data* PID, TYPE_ASSERVISSEMENT_PID_POS Position, TYPE_ASSERVISSEMENT_PID_TIME Time);
+TYPE_ASSERVISSEMENT_PID_RETURN PID_Tick(
+    PID_Data* PID,
+    TYPE_ASSERVISSEMENT_PID_POS Position,
+    TYPE_ASSERVISSEMENT_PID_TIME Time
+    );
+
+
+float tick_to_meter(enum encoder_sel sel, int num_tick);
+#define ENCODER_A_TO_METER (1);
