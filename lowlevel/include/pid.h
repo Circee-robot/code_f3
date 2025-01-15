@@ -13,6 +13,7 @@ typedef struct
 
     TYPE_ASSERVISSEMENT_PID_INTEGRAL Integration;
     TYPE_ASSERVISSEMENT_PID_TIME LastTime;
+    TYPE_ASSERVISSEMENT_PID_POS LastPosition;
     TYPE_ASSERVISSEMENT_PID_POS LastValue;
     TYPE_ASSERVISSEMENT_PID_POS Target;
 
@@ -54,7 +55,7 @@ void PID_Reset(
     PID_Data* PID,
     TYPE_ASSERVISSEMENT_PID_TIME Time,
     TYPE_ASSERVISSEMENT_PID_INTEGRAL Integral,
-    TYPE_ASSERVISSEMENT_PID_POS LastValue
+    TYPE_ASSERVISSEMENT_PID_POS LastPosition
     );
 
 TYPE_ASSERVISSEMENT_PID_RETURN PID_Tick(
@@ -64,5 +65,6 @@ TYPE_ASSERVISSEMENT_PID_RETURN PID_Tick(
     );
 
 
+float tick_to_meter(enum encoder_sel sel, int num_tick);
 float tick_to_meter(enum encoder_sel sel, int num_tick);
 #define ENCODER_A_TO_METER (1);
