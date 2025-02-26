@@ -36,11 +36,11 @@ typedef struct _config {
 # define KP_A (1.3)
 # define KI_A (0.2)
 # define KD_A (25)
-# define KP_B (1)
-# define KI_B (0)
-# define KD_B (0)
+# define KP_B (1.3)
+# define KI_B (0.2)
+# define KD_B (25)
 
-# define IMAX (1000)
+# define IMAX (100)
 
 # define MEASURE_PERIOD_MS  (5)
 

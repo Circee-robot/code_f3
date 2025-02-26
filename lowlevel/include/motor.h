@@ -94,7 +94,7 @@
 #define MOTOR_B_PORT_DIR			GPIOA
 #define MOTOR_B_PIN_DIR	    		GPIO3
 
-#define MOTOR_B_INVERT_DIR (1)
+#define MOTOR_B_INVERT_DIR (0)
 /** @} */
 
 

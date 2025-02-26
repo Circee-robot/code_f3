@@ -29,12 +29,12 @@ void test_asserv(){
     pid_state state_B = EMPTY_STATE;
 
     set_directive(&state_A, 10000);
-    // set_directive(&state_B, 10000);
+    set_directive(&state_B, 10000);
     int cnt = 0;
 
     while(true){
         update_motor(config_A, &state_A);
-        // update_motor(config_B, &state_B);
+        update_motor(config_B, &state_B);
         // fprintf(stderr,
         // "Motor update: directive is %d, error was %d, last pid output was %d, position is %d\n",
         // (int)state_A.directive_tick,

@@ -26,7 +26,13 @@ void update_motor(
     }
 
 
-    motor_set(config.motor_sel,(uint8_t) (int)motor_ctrl, motor_dir);
+    // Stop condition
+    if(motor_ctrl > 100){
+        motor_set(config.motor_sel,(uint8_t) (int)motor_ctrl, motor_dir);
+    } else {
+        motor_set(config.motor_sel,(uint8_t) (int)motor_ctrl, STOP);
+    }
+
     // fprintf(stderr,"Setting motor %d to %d\tdir=%d\n",config.motor_sel,(int)motor_ctrl*10000, motor_dir);
 }
 
