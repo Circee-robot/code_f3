@@ -79,3 +79,9 @@ float pid(pid_config config, pid_state * state, float error);
  * @param state
  */
 void set_directive(pid_state * state, float directive);
+/**
+ * @brief This function resets a pid's state as if the motor was at position 0
+ *
+ * @param state
+ */
+void reset_pid(pid_state * state);

@@ -77,3 +77,13 @@ void set_directive(
     *state = EMPTY_STATE;
     state->directive_tick = directive;
 }
+
+void reset_pid(
+    pid_state * state
+){
+    state->last_error = 0;
+    state->error_sum = 0;
+    state->last_pid_output = 0;
+    state->pos_tick = 0;
+    state->convergence_counter = 0;
+}
