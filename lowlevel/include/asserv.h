@@ -54,6 +54,7 @@ typedef struct _state {
     float error_sum;
     float last_pid_output;
     int pos_tick;
+    int convergence_counter;
 } pid_state;
 static const pid_state EMPTY_STATE;
 /**

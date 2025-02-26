@@ -26,11 +26,17 @@ void update_motor(
     }
 
 
-    // Stop condition
+    // Stop condition TODO better conditions
     if(motor_ctrl > 100){
         motor_set(config.motor_sel,(uint8_t) (int)motor_ctrl, motor_dir);
+        state->convergence_counter = 0;
     } else {
-        motor_set(config.motor_sel,(uint8_t) (int)motor_ctrl, STOP);
+        if(state->convergence_counter > 30){
+            motor_set(config.motor_sel,(uint8_t) (int)motor_ctrl, STOP);
+        } else {
+            state->convergence_counter++;
+            motor_set(config.motor_sel,(uint8_t) (int)motor_ctrl, motor_dir);
+        }
     }
 
     // fprintf(stderr,"Setting motor %d to %d\tdir=%d\n",config.motor_sel,(int)motor_ctrl*10000, motor_dir);
