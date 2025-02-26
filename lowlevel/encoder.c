@@ -66,12 +66,16 @@ int encoder_update(enum encoder_sel sel, volatile int *count){
 	const int cnt = _encoder_get_counter(sel);
 
 	int dl = cnt - *count;
-	int limit = ENCODER_PERIOD/2;
-	*count = cnt;
+	// fprintf(stderr, "(1) dl=%d\tcnt=%d\n", dl, cnt);
+	int limit = ENCODER_PERIOD/4;
 	if(dl > limit){
-	  dl = dl-ENCODER_PERIOD;
+	  dl -= ENCODER_PERIOD;
 	}else if(dl < -limit){
-	  dl = dl+ENCODER_PERIOD;
+	  dl += ENCODER_PERIOD;
 	}
+	// fprintf(stderr, "(2) dl=%d\tcnt=%d\n", dl, cnt);
+
+	*count = cnt;
 	return dl;
+
 }

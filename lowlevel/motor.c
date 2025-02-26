@@ -40,6 +40,7 @@ void motor_sleep(){
 
 void motor_set(enum motor_sel sel, uint8_t value, enum motor_state state){
 
+    // fprintf(stderr,"Inside motor.c: value= %d\n",value);
     int speed;
     gpio_set(MOTOR_PORT_EEP,MOTOR_PIN_EEP);
     if(sel == MOTOR_B){
@@ -66,7 +67,7 @@ void motor_set(enum motor_sel sel, uint8_t value, enum motor_state state){
                 } else {
                     gpio_clear(MOTOR_B_PORT_DIR,MOTOR_B_PIN_DIR);
                 }
-                speed = value * PWM_PERIOD/255.;
+                speed = (255 - value) * PWM_PERIOD/255.;
                 timer_set_oc_value(MOTOR_TIM, MOTOR_B_OC_ID, speed);
                 break;
         }
@@ -94,7 +95,7 @@ void motor_set(enum motor_sel sel, uint8_t value, enum motor_state state){
                 } else {
                     gpio_clear(MOTOR_A_PORT_DIR,MOTOR_A_PIN_DIR);
                 }
-                speed = value * PWM_PERIOD/255.;
+                speed = (255-value) * PWM_PERIOD/255.;
                 timer_set_oc_value(MOTOR_TIM, MOTOR_A_OC_ID, speed);
                 break;
         }

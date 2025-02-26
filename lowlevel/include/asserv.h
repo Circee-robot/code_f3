@@ -33,14 +33,16 @@ typedef struct _config {
 /**
  * Values of both motors' PIDs
  */
-# define KP_A (1)
-# define KI_A (0)
-# define KD_A (0)
+# define KP_A (1.3)
+# define KI_A (0.2)
+# define KD_A (25)
 # define KP_B (1)
 # define KI_B (0)
 # define KD_B (0)
 
-# define MEASURE_PERIOD_MS  (20)
+# define IMAX (1000)
+
+# define MEASURE_PERIOD_MS  (5)
 
 /**
  * Contains motor specific PID loop state

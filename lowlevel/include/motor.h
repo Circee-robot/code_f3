@@ -20,16 +20,18 @@
 #include "gpio.h"
 
 /**
+ * FIXME: update comment
  * Prescale 64000000 Hz system clock by 64 = 1000000 Hz.
  * We count from 0 so -1
  */
-#define PWM_PRESCALE	(64-1)
+#define PWM_PRESCALE	(1)
 
 /**
+ * FIXME:UPDATE COMMENT
  * We need a 50 Hz period (1000 / 20ms = 50), thus divide 100000 by 50 = 20000 (us).
  * We count from 0 so -1
  */
-#define PWM_PERIOD		(20000-1)
+#define PWM_PERIOD		(255*100)
 
 
 /**
@@ -92,7 +94,7 @@
 #define MOTOR_B_PORT_DIR			GPIOA
 #define MOTOR_B_PIN_DIR	    		GPIO3
 
-#define MOTOR_B_INVERT_DIR (0)
+#define MOTOR_B_INVERT_DIR (1)
 /** @} */
 
 

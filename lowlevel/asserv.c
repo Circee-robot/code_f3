@@ -9,7 +9,9 @@ void update_motor(
     // Calculating PID
     float error = state->directive_tick - state->pos_tick;
     float pid_output = pid(config,state,error);
-    float motor_ctrl = (pid_output - state->last_pid_output);
+    // float motor_ctrl = (pid_output - state->last_pid_output);
+    float motor_ctrl = pid_output;
+
     state->last_pid_output = pid_output;
     // Direction switch
     enum motor_state motor_dir;
@@ -19,7 +21,13 @@ void update_motor(
         motor_ctrl = motor_ctrl * (-1);
         motor_dir = BACKWARD;
     }
-    motor_set(config.motor_sel,(uint8_t) motor_ctrl, motor_dir);
+    if (motor_ctrl>255){
+        motor_ctrl = 255;
+    }
+
+
+    motor_set(config.motor_sel,(uint8_t) (int)motor_ctrl, motor_dir);
+    // fprintf(stderr,"Setting motor %d to %d\tdir=%d\n",config.motor_sel,(int)motor_ctrl*10000, motor_dir);
 }
 
 float pid(

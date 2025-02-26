@@ -18,11 +18,12 @@
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/timer.h>
+#include "uart.h"
 
 /**
  * number of ticks per turn, encoder 300CPR
  */
-#define ENCODER_PERIOD (300*4-1)
+#define ENCODER_PERIOD ((1<<16) - 1)
 
 /**
  * @defgroup ENCODER_A encoder_a

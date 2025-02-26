@@ -1,4 +1,4 @@
-DEBUG:=putain
+DEBUG:=onestwokeici
 
 default: all
 
@@ -38,7 +38,7 @@ CFlags += \
 
 
 ifdef DEBUG
-	CFlags += -O0
+	CFlags += -O0 -g
 else
 	CFlags += -Os
 endif

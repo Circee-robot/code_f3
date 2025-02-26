@@ -21,6 +21,7 @@
 #include "timer_int.h"
 #include "canmsgs.h"
 #include "usound.h"
+#include "asserv.h"
 
 void test_us_trigger();
 void test_us_echo();
@@ -30,3 +31,4 @@ void test_interrupt_timer();
 void blink_led();
 void test_can_transmit();
 void test_encoder();
+void test_asserv();
