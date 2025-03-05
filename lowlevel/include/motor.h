@@ -68,7 +68,7 @@
 #define MOTOR_A_PORT_DIR			GPIOF
 #define MOTOR_A_PIN_DIR			    GPIO1
 
-#define MOTOR_A_INVERT_DIR (0)
+#define MOTOR_A_INVERT_DIR (1)
 /** @} */
 
 /**
@@ -94,7 +94,7 @@
 #define MOTOR_B_PORT_DIR			GPIOA
 #define MOTOR_B_PIN_DIR	    		GPIO3
 
-#define MOTOR_B_INVERT_DIR (0)
+#define MOTOR_B_INVERT_DIR (1)
 /** @} */
 
 

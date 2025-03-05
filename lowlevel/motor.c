@@ -54,20 +54,22 @@ void motor_set(enum motor_sel sel, uint8_t value, enum motor_state state){
                 /* direction 1: EN=PWM DIR=1 */
                 if(MOTOR_B_INVERT_DIR == 0){
                     gpio_clear(MOTOR_B_PORT_DIR,MOTOR_B_PIN_DIR);
+                    speed = value * PWM_PERIOD/255.;
                 } else {
                     gpio_set(MOTOR_B_PORT_DIR,MOTOR_B_PIN_DIR);
+                    speed = (255 - value) * PWM_PERIOD/255.;
                 }
-                speed = value * PWM_PERIOD/255.;
                 timer_set_oc_value(MOTOR_TIM, MOTOR_B_OC_ID, speed);
                 break;
             case BACKWARD:
                 /* direction 2: EN=PWM DIR=0 */
                 if(MOTOR_B_INVERT_DIR == 0){
                     gpio_set(MOTOR_B_PORT_DIR,MOTOR_B_PIN_DIR);
+                    speed = (255 - value) * PWM_PERIOD/255.;
                 } else {
                     gpio_clear(MOTOR_B_PORT_DIR,MOTOR_B_PIN_DIR);
+                    speed = value * PWM_PERIOD/255.;
                 }
-                speed = (255 - value) * PWM_PERIOD/255.;
                 timer_set_oc_value(MOTOR_TIM, MOTOR_B_OC_ID, speed);
                 break;
         }
@@ -82,20 +84,22 @@ void motor_set(enum motor_sel sel, uint8_t value, enum motor_state state){
                 /* direction 1: EN=PWM DIR=1 */
                 if(MOTOR_A_INVERT_DIR == 0){
                     gpio_clear(MOTOR_A_PORT_DIR,MOTOR_A_PIN_DIR);
+                    speed = value * PWM_PERIOD/255.;
                 } else {
                     gpio_set(MOTOR_A_PORT_DIR,MOTOR_A_PIN_DIR);
+                    speed = (255-value) * PWM_PERIOD/255.;
                 }
-                speed = value * PWM_PERIOD/255.;
                 timer_set_oc_value(MOTOR_TIM, MOTOR_A_OC_ID, speed);
                 break;
             case BACKWARD:
                 /* direction 2: EN=PWM DIR=0 */
                 if(MOTOR_A_INVERT_DIR == 0){
                     gpio_set(MOTOR_A_PORT_DIR,MOTOR_A_PIN_DIR);
+                    speed = (255-value) * PWM_PERIOD/255.;
                 } else {
                     gpio_clear(MOTOR_A_PORT_DIR,MOTOR_A_PIN_DIR);
+                    speed = value * PWM_PERIOD/255.;
                 }
-                speed = (255-value) * PWM_PERIOD/255.;
                 timer_set_oc_value(MOTOR_TIM, MOTOR_A_OC_ID, speed);
                 break;
         }

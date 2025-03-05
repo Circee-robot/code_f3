@@ -17,8 +17,8 @@ void test_motor(){
     motor_setup();
 
     while(1){
-        motor_set(MOTOR_A,127,BACKWARD);
-        motor_set(MOTOR_B,127,BACKWARD);
+        motor_set(MOTOR_A,30,BACKWARD);
+        motor_set(MOTOR_B,30,BACKWARD);
         // motor_set(MOTOR_A,-1,STOP);
         // delay_ms(4000);
         delay_ms(1000);
@@ -34,8 +34,8 @@ void test_motor(){
         // motor_set(MOTOR_A,-1,FREE);
         // delay_ms(40);
 
-        motor_set(MOTOR_A,127,FORWARD);
-        motor_set(MOTOR_B,127,FORWARD);
+        motor_set(MOTOR_A,255,FORWARD);
+        motor_set(MOTOR_B,255,FORWARD);
         delay_ms(1000);
         // motor_set(MOTOR_B,128,BACKWARD);
         // delay_ms(40);

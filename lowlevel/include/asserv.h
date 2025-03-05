@@ -18,7 +18,7 @@
 #include "motor.h"
 #include "encoder.h"
 
-/**
+        /**
  * Motor specific config structure for the PID
  */
 typedef struct _config {
@@ -33,14 +33,22 @@ typedef struct _config {
 /**
  * Values of both motors' PIDs
  */
-# define KP_A (1.3)
-# define KI_A (0.2)
-# define KD_A (25)
-# define KP_B (1.3)
-# define KI_B (0.2)
-# define KD_B (25)
+//# define KP_A (1.3)
+//# define KI_A (0.2)
+//# define KD_A (25)
+//# define KP_B (1.3)
+//# define KI_B (0.2)
+//# define KD_B (25)
 
-# define IMAX (100)
+# define KP_A (4)
+# define KI_A (0.1)
+# define KD_A (3.5)
+
+# define KP_B (4)
+# define KI_B (0.1)
+# define KD_B (3.5)
+
+# define IMAX (1000)
 
 # define MEASURE_PERIOD_MS  (5)
 

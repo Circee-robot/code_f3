@@ -47,15 +47,9 @@ void encoder_setup(){
 int _encoder_get_counter(enum encoder_sel sel){
 	switch(sel){
 		case ENCODER_A:
-			if(ENCODER_A_INVERSION){
-				return ENCODER_PERIOD-timer_get_counter(ENCODER_A_TIM);
-			}
 			return timer_get_counter(ENCODER_A_TIM);
 			break;
 		case ENCODER_B:
-			if(ENCODER_B_INVERSION){
-				return ENCODER_PERIOD-timer_get_counter(ENCODER_B_TIM);
-			}
 			return timer_get_counter(ENCODER_B_TIM);
 			break;
 	}
@@ -65,7 +59,24 @@ int _encoder_get_counter(enum encoder_sel sel){
 int encoder_update(enum encoder_sel sel, volatile int *count){
 	const int cnt = _encoder_get_counter(sel);
 
-	int dl = cnt - *count;
+    int dl;
+    switch(sel){
+        case ENCODER_A:
+            if(ENCODER_A_INVERSION){
+                dl = *count - cnt;
+            } else {
+                dl = cnt - *count;
+            }
+            break;
+        case ENCODER_B:
+            if(ENCODER_B_INVERSION){
+                dl = *count - cnt;
+            } else {
+                dl = cnt - *count;
+            }
+            break;
+    }
+
 	// fprintf(stderr, "(1) dl=%d\tcnt=%d\n", dl, cnt);
 	int limit = ENCODER_PERIOD/4;
 	if(dl > limit){

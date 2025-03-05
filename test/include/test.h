@@ -31,4 +31,5 @@ void test_interrupt_timer();
 void blink_led();
 void test_can_transmit();
 void test_encoder();
+void test_straight_line();
 void test_asserv();

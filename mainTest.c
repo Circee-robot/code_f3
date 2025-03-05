@@ -17,5 +17,6 @@ int main(){
     // test_us_echo();
     // test_us();
     test_asserv();
+    // test_straight_line();
 }
 

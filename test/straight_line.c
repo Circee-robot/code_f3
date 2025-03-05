@@ -30,16 +30,16 @@ void test_straight_line(){
     pid_state state_B = EMPTY_STATE;
     int segment_counter = 0;
     int segment_time = clock_get_systicks();
-    set_directive(&state_A, 10000);
-    set_directive(&state_B, 10000);
+    set_directive(&state_A, 100);
+    set_directive(&state_B, 100);
 
     while(true){
         // Every 8 seconds, reset pid state and add 10000 to directive
-        if(clock_get_systicks() - segment_time < 8000){
+        if(clock_get_systicks() - segment_time < 16000){
             segment_time = clock_get_systicks();
             segment_counter++;
-            set_directive(&state_A, 10000 * segment_counter);
-            set_directive(&state_B, 10000 * segment_counter);
+            set_directive(&state_A, 100 * segment_counter);
+            set_directive(&state_B, 100 * segment_counter);
             reset_pid(&state_A);
             reset_pid(&state_B);
         }

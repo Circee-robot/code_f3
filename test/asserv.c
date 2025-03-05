@@ -35,14 +35,14 @@ void test_asserv(){
     while(true){
         update_motor(config_A, &state_A);
         update_motor(config_B, &state_B);
-        // fprintf(stderr,
-        // "Motor update: directive is %d, error was %d, last pid output was %d, position is %d\n",
-        // (int)state_A.directive_tick,
-        // (int)state_A.last_error,
-        // (int)state_A.last_pid_output,
-        // state_A.pos_tick);
+        //fprintf(stderr,
+        //"Motor update: directive is %d, error was %d, last pid output was %d, position is %d\n",
+        //(int)state_A.directive_tick,
+        //(int)state_A.last_error,
+        //(int)state_A.last_pid_output,
+        //state_A.pos_tick);
 
-        measure_array[cnt] = state_A.pos_tick;
+        measure_array[cnt] = state_A.error_sum;
 
         if (cnt ==ARRAY_SIZE){
             fprintf(stderr,"\nnew array\n");
