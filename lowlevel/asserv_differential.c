@@ -15,12 +15,20 @@ void update_diff(
     // Calculating PID
     float error_theta = state_theta->directive_value - state_theta->pos_value;
     float error_delta = state_delta->directive_value - state_delta->pos_value;
-    float pid_output_theta = pid(state_theta,error_theta);
-    float pid_output_delta = pid(state_delta,error_delta);
+    float pid_output_theta = pid_diff(state_theta,error_theta);
+    float pid_output_delta = pid_diff(state_delta,error_delta);
 
     state_theta->last_pid_output = pid_output_theta;
     state_delta->last_pid_output = pid_output_delta;
-    
+
+    float motor_ctrl_B =  pid_output_delta + pid_output_theta / 2;
+    float motor_ctrl_A =  pid_output_delta - pid_output_theta / 2;
+
+    pid_to_motor(MOTOR_B, motor_ctrl_B);
+    pid_to_motor(MOTOR_A, motor_ctrl_A);
+}
+
+int pid_to_motor(enum motor_sel sel,int motor_ctrl){
     // Direction switch
     enum motor_state motor_dir;
     if (motor_ctrl >= 0) {
@@ -33,23 +41,9 @@ void update_diff(
         motor_ctrl = 255;
     }
 
+    motor_set(sel,(uint8_t) (int)motor_ctrl, motor_dir);
 
-    // Stop condition TODO better conditions
-    if(motor_ctrl > 150){
-        motor_set(config.motor_sel,(uint8_t) (int)motor_ctrl, motor_dir);
-        state->convergence_counter = 0;
-    } else {
-        if(state->convergence_counter > 30){
-            motor_set(config.motor_sel,(uint8_t) (int)motor_ctrl, STOP);
-            state->error_sum = 0;
-        } else {
-            state->convergence_counter++;
-            motor_set(config.motor_sel,(uint8_t) (int)motor_ctrl, motor_dir);
-        }
-    }
-    // motor_set(config.motor_sel,(uint8_t) (int)motor_ctrl, motor_dir);
-
-    //fprintf(stderr,"Setting motor %d to %d\tdir=%d\n",config.motor_sel,(int)motor_ctrl*10000, motor_dir);
+    return 0;
 }
 
 float pid_diff(
@@ -85,14 +79,4 @@ void set_directive_diff(
 ){
     *state = EMPTY_STATE;
     state->directive_tick = directive;
-}
-
-void reset_pid_diff(
-    pid_state_diff * state
-){
-    state->last_error = 0;
-    state->error_sum = 0;
-    state->last_pid_output = 0;
-    state->pos_tick = 0;
-    state->convergence_counter = 0;
 }

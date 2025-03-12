@@ -50,31 +50,36 @@ typedef struct _encoder_state {
     int prev_A;
     int prev_B;
 } encoder_state;
+
+
 /**
  * @brief To be called regularly, will try to follow directive set in
  * state enum
  *
- * @param config Motor specific config coefficients
- * @param state Motor specific state (last error, integrated error..)
+ * @param state_delta distance state (last error, integrated error..)
+ * @param state_theta angular state (last error, integrated error..)
  */
 void update_diff(pid_state_diff * state_delta, pid_state_diff * state_theta);
+
+/**
+ * @brief Converts pid output to motor directive.
+ * @param sel motor selection
+ * @param motor_ctrl converted from pid output
+ */
+int pid_to_motor(enum motor_sel sel,int motor_ctrl);
+
 /**
  * @brief Computes PID from error
  *
+ * @param state pid internal state
  * @param error Error in
- * @param value value is between 0 and 255
- * @param state Motor config between STOP FREE FORWARD BACKWARD
  */
 float pid_diff(pid_state * state, float error);
+
 /**
- * @brief This function pilots the motor_sel (MOTOR_A or MOTOR_B) with a value between -100(backward full speed) and +100 (forward full speed). The forward direction depends on the sign of MOTOR_X_INVER_DIR.
+ * @brief Set the directive variable in internal pid state
  *
  * @param state
+ * @param directive
  */
 void set_directive_diff(pid_state * state, float directive);
-/**
- * @brief This function resets a pid's state as if the motor was at position 0
- *
- * @param state
- */
-void reset_pid(pid_state * state);
