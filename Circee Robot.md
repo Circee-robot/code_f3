@@ -10,14 +10,14 @@ Reboot du projet point de vue elec autour de plaque de prototypage. Design modul
 - Test ultrason
 	- trigger generation [[Circee Robot]]works
 	- trigger + measurmeent doesnt work when tested on debugger: random measurements
-		- measurement multiplexed doesnt work cause the trigger gpio is not free and prevent us from measuring (on the same fucking gpio) 
+		- measurement multiplexed doesnt work cause the trigger gpio is not free and prevent us from measuring (on the same fucking gpio)
 	- the normal HC SR04 works with our current code
 	- breakpoints in interrupt routine fucks measurement !
 	- To use the cursed the HCSR04 it seems (from the arduino official lib) to reconfigure the whole ass same pin every single time you want to get or receive a measurement
 ## 23/07/2024
 - Soldered new connector on battery
 ### TODO
-- [ ] Need to make cable of the battery charger 
+- [ ] Need to make cable of the battery charger
 - [ ] Xavier
 	- [x] order cable
 	- [ ] panne fer a souder
@@ -57,6 +57,14 @@ Reboot du projet point de vue elec autour de plaque de prototypage. Design modul
 - [ ] Low level motor code to be updated for 2 pins operation
 - [x] Crist: Ramener PLA
 - [x] Xav: Imprimer les supports avec differents remplissages,tester le fit
+
+## 18/06/2025
+- Il y a 2 versions d'asser sur le repo
+	- une version asser en position de chaque moteur qui marche
+	- une ébauche de la version delta theta non fonctionnel avec pb structurels
+### TODO
+- spécifier le code de l'asservissement différentiel delta theta
+- rédaction du code
 
 # Elec
 ## Pont en H : DRV8833
